@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>UAZ Company</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:#0a0a0f;color:#f0ede6;min-height:100vh;}
+nav{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 3rem;background:rgba(10,10,15,0.95);border-bottom:0.5px solid rgba(255,255,255,0.08);position:sticky;top:0;z-index:100;}
+.logo{font-family:'Playfair Display',serif;font-size:1.5rem;color:#c8a96e;letter-spacing:1px;}
+.logo span{color:#f0ede6;}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{color:rgba(240,237,230,0.65);text-decoration:none;font-size:0.875rem;transition:color 0.2s;}
+.nav-links a:hover{color:#c8a96e;}
+.nav-cta{background:#c8a96e;color:#0a0a0f;border:none;padding:0.55rem 1.3rem;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:0.875rem;font-weight:500;cursor:pointer;transition:background 0.2s;}
+.nav-cta:hover{background:#dfc08a;}
+.hero{padding:5rem 3rem 4rem;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(200,169,110,0.12) 0%,transparent 70%);pointer-events:none;}
+.hero-tag{display:inline-block;border:0.5px solid rgba(200,169,110,0.5);color:#c8a96e;font-size:0.78rem;letter-spacing:2px;text-transform:uppercase;padding:0.35rem 1rem;border-radius:20px;margin-bottom:1.5rem;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,4rem);font-weight:700;line-height:1.15;max-width:720px;margin-bottom:1.2rem;}
+.hero h1 em{color:#c8a96e;font-style:normal;}
+.hero p{color:rgba(240,237,230,0.6);font-size:1.05rem;max-width:520px;line-height:1.7;margin-bottom:2.5rem;}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;}
+.btn-primary{background:#c8a96e;color:#0a0a0f;border:none;padding:0.8rem 2rem;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:0.95rem;font-weight:500;cursor:pointer;transition:all 0.2s;}
+.btn-primary:hover{background:#dfc08a;transform:translateY(-1px);}
+.btn-outline{background:transparent;color:#f0ede6;border:0.5px solid rgba(240,237,230,0.3);padding:0.8rem 2rem;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:0.95rem;cursor:pointer;transition:all 0.2s;}
+.btn-outline:hover{border-color:#c8a96e;color:#c8a96e;}
+.stats{display:flex;justify-content:center;gap:3rem;padding:2.5rem 3rem;border-top:0.5px solid rgba(255,255,255,0.07);border-bottom:0.5px solid rgba(255,255,255,0.07);flex-wrap:wrap;}
+.stat{text-align:center;}
+.stat-num{font-family:'Playfair Display',serif;font-size:2rem;color:#c8a96e;font-weight:700;}
+.stat-label{font-size:0.8rem;color:rgba(240,237,230,0.5);letter-spacing:1px;text-transform:uppercase;margin-top:0.25rem;}
+.search-section{padding:3rem 3rem 2rem;text-align:center;}
+.search-section h2{font-family:'Playfair Display',serif;font-size:1.7rem;margin-bottom:1.5rem;color:#f0ede6;}
+.search-bar{display:flex;gap:0;max-width:800px;margin:0 auto;background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.15);border-radius:10px;overflow:hidden;flex-wrap:wrap;}
+.search-bar select,.search-bar input{background:transparent;border:none;outline:none;color:#f0ede6;font-family:'DM Sans',sans-serif;font-size:0.9rem;padding:0.9rem 1.2rem;flex:1;min-width:120px;}
+.search-bar select option{background:#1a1a2e;color:#f0ede6;}
+.search-bar .divider{width:0.5px;background:rgba(255,255,255,0.12);align-self:stretch;}
+.search-btn{background:#c8a96e;color:#0a0a0f;border:none;padding:0.9rem 1.8rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:500;cursor:pointer;white-space:nowrap;transition:background 0.2s;}
+.search-btn:hover{background:#dfc08a;}
+.filter-tags{display:flex;gap:0.6rem;justify-content:center;margin-top:1rem;flex-wrap:wrap;}
+.filter-tag{border:0.5px solid rgba(255,255,255,0.15);color:rgba(240,237,230,0.65);padding:0.4rem 1rem;border-radius:20px;font-size:0.8rem;cursor:pointer;transition:all 0.2s;}
+.filter-tag:hover,.filter-tag.active{border-color:#c8a96e;color:#c8a96e;}
+.listings-section{padding:2rem 3rem 4rem;}
+.section-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:2rem;}
+.section-header h2{font-family:'Playfair Display',serif;font-size:1.7rem;}
+.see-all{color:#c8a96e;font-size:0.875rem;cursor:pointer;text-decoration:none;border-bottom:0.5px solid rgba(200,169,110,0.4);}
+.listings-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;}
+.card{background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.1);border-radius:12px;overflow:hidden;transition:transform 0.25s,border-color 0.25s;cursor:pointer;}
+.card:hover{transform:translateY(-4px);border-color:rgba(200,169,110,0.4);}
+.card-img-placeholder{width:100%;height:180px;display:flex;align-items:center;justify-content:center;font-size:3rem;background:linear-gradient(135deg,rgba(200,169,110,0.08) 0%,rgba(200,169,110,0.03) 100%);position:relative;}
+.card-badge{position:absolute;top:12px;left:12px;padding:0.25rem 0.7rem;border-radius:20px;font-size:0.75rem;font-weight:500;}
+.badge-sale{background:rgba(200,169,110,0.9);color:#0a0a0f;}
+.badge-rent{background:rgba(59,130,246,0.85);color:#fff;}
+.badge-new{background:rgba(34,197,94,0.85);color:#0a0a0f;}
+.card-body{padding:1rem 1.2rem 1.2rem;}
+.card-price{font-family:'Playfair Display',serif;font-size:1.35rem;color:#c8a96e;font-weight:700;}
+.card-title{font-size:0.95rem;font-weight:500;margin:0.4rem 0 0.3rem;color:#f0ede6;}
+.card-loc{font-size:0.82rem;color:rgba(240,237,230,0.5);margin-bottom:0.8rem;}
+.card-features{display:flex;gap:1rem;font-size:0.8rem;color:rgba(240,237,230,0.55);border-top:0.5px solid rgba(255,255,255,0.07);padding-top:0.8rem;}
+.features-section{padding:3rem;background:rgba(255,255,255,0.02);border-top:0.5px solid rgba(255,255,255,0.07);}
+.features-section h2{font-family:'Playfair Display',serif;font-size:1.7rem;text-align:center;margin-bottom:2rem;}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;max-width:900px;margin:0 auto;}
+.feature-card{background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.08);border-radius:10px;padding:1.5rem;text-align:center;}
+.feature-icon{font-size:2rem;margin-bottom:0.8rem;}
+.feature-card h3{font-size:0.95rem;font-weight:500;margin-bottom:0.4rem;color:#f0ede6;}
+.feature-card p{font-size:0.82rem;color:rgba(240,237,230,0.5);line-height:1.6;}
+.agent-section{padding:3rem;text-align:center;}
+.agent-section h2{font-family:'Playfair Display',serif;font-size:1.7rem;margin-bottom:0.6rem;}
+.agent-section p{color:rgba(240,237,230,0.55);margin-bottom:2rem;font-size:0.95rem;}
+.agent-form{display:flex;flex-direction:column;gap:1rem;max-width:480px;margin:0 auto;}
+.agent-form input,.agent-form textarea{background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.15);border-radius:8px;color:#f0ede6;font-family:'DM Sans',sans-serif;font-size:0.9rem;padding:0.85rem 1rem;outline:none;transition:border-color 0.2s;}
+.agent-form input:focus,.agent-form textarea:focus{border-color:#c8a96e;}
+.agent-form textarea{resize:vertical;min-height:90px;}
+footer{padding:2rem 3rem;border-top:0.5px solid rgba(255,255,255,0.07);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.footer-logo{font-family:'Playfair Display',serif;color:#c8a96e;font-size:1.1rem;}
+.footer-links{display:flex;gap:1.5rem;list-style:none;}
+.footer-links a{color:rgba(240,237,230,0.4);font-size:0.82rem;text-decoration:none;}
+.footer-copy{color:rgba(240,237,230,0.3);font-size:0.8rem;}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:999;align-items:center;justify-content:center;}
+.modal-overlay.open{display:flex;}
+.modal{background:#13131f;border:0.5px solid rgba(255,255,255,0.12);border-radius:14px;padding:2rem;max-width:480px;width:90%;position:relative;}
+.modal h3{font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:0.4rem;color:#c8a96e;}
+.modal p{font-size:0.88rem;color:rgba(240,237,230,0.55);margin-bottom:1.2rem;}
+.modal-close{position:absolute;top:1rem;right:1.2rem;background:none;border:none;color:rgba(240,237,230,0.5);font-size:1.3rem;cursor:pointer;}
+.modal-details{display:grid;grid-template-columns:1fr 1fr;gap:0.7rem;margin-bottom:1.2rem;}
+.detail-item{background:rgba(255,255,255,0.04);border-radius:8px;padding:0.7rem 1rem;}
+.detail-label{font-size:0.75rem;color:rgba(240,237,230,0.45);margin-bottom:0.2rem;}
+.detail-value{font-size:0.9rem;font-weight:500;color:#f0ede6;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">UAZ <span>Company</span></div>
+  <ul class="nav-links">
+    <li><a href="#">Buy</a></li>
+    <li><a href="#">Rent</a></li>
+    <li><a href="#">Sell</a></li>
+    <li><a href="#">Agents</a></li>
+    <li><a href="#">About</a></li>
+  </ul>
+  <button class="nav-cta" onclick="openContact()">List Your Property</button>
+</nav>
+
+<section class="hero">
+  <div class="hero-tag">Nigeria's Premium Real Estate Platform</div>
+  <h1>Find Your <em>Dream Home</em> With Confidence</h1>
+  <p>Browse thousands of verified listings across Abuja, Lagos, and Port Harcourt. Expert agents, transparent pricing.</p>
+  <div class="hero-btns">
+    <button class="btn-primary" onclick="document.querySelector('.listings-section').scrollIntoView({behavior:'smooth'})">Browse Listings</button>
+    <button class="btn-outline" onclick="openContact()">Talk to an Agent</button>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stat"><div class="stat-num">2,400+</div><div class="stat-label">Properties Listed</div></div>
+  <div class="stat"><div class="stat-num">980+</div><div class="stat-label">Deals Closed</div></div>
+  <div class="stat"><div class="stat-num">150+</div><div class="stat-label">Verified Agents</div></div>
+  <div class="stat"><div class="stat-num">8 yrs</div><div class="stat-label">In the Market</div></div>
+</div>
+
+<section class="search-section">
+  <h2>Search Properties</h2>
+  <div class="search-bar">
+    <select id="propType">
+      <option value="">Property Type</option>
+      <option>House</option>
+      <option>Apartment</option>
+      <option>Duplex</option>
+      <option>Land</option>
+      <option>Commercial</option>
+    </select>
+    <div class="divider"></div>
+    <input type="text" id="location" placeholder="Location (e.g. Maitama, Abuja)" />
+    <div class="divider"></div>
+    <select id="budget">
+      <option value="">Budget</option>
+      <option>₦10M – ₦30M</option>
+      <option>₦30M – ₦80M</option>
+      <option>₦80M – ₦200M</option>
+      <option>₦200M+</option>
+    </select>
+    <button class="search-btn" onclick="doSearch()">Search</button>
+  </div>
+  <div class="filter-tags">
+    <span class="filter-tag active" onclick="filterTag(this,'all')">All</span>
+    <span class="filter-tag" onclick="filterTag(this,'sale')">For Sale</span>
+    <span class="filter-tag" onclick="filterTag(this,'rent')">For Rent</span>
+    <span class="filter-tag" onclick="filterTag(this,'new')">New Listings</span>
+    <span class="filter-tag" onclick="filterTag(this,'luxury')">Luxury</span>
+  </div>
+</section>
+
+<section class="listings-section">
+  <div class="section-header">
+    <h2>Featured Properties</h2>
+    <a class="see-all" href="#">View all listings →</a>
+  </div>
+  <div class="listings-grid" id="listingsGrid"></div>
+</section>
+
+<section class="features-section">
+  <h2>Why Choose UAZ Company?</h2>
+  <div class="features-grid">
+    <div class="feature-card"><div class="feature-icon">🔐</div><h3>Verified Listings</h3><p>Every property is verified by our team before it goes live.</p></div>
+    <div class="feature-card"><div class="feature-icon">🤝</div><h3>Expert Agents</h3><p>150+ certified agents ready to guide you through every step.</p></div>
+    <div class="feature-card"><div class="feature-icon">📊</div><h3>Market Insights</h3><p>Real-time price data and neighborhood analytics at your fingertips.</p></div>
+    <div class="feature-card"><div class="feature-icon">⚖️</div><h3>Legal Support</h3><p>In-house legal team to handle documentation and title verification.</p></div>
+  </div>
+</section>
+
+<section class="agent-section">
+  <h2>Talk to an Agent</h2>
+  <p>Fill in your details and a dedicated UAZ Company agent will reach out within 24 hours.</p>
+  <div class="agent-form">
+    <input type="text" placeholder="Your full name" />
+    <input type="tel" placeholder="Phone number" />
+    <input type="text" placeholder="Property interest (e.g. 3-bed in Gwarinpa)" />
+    <textarea placeholder="Any specific requirements or questions?"></textarea>
+    <button class="btn-primary" style="width:100%">Send Enquiry</button>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">UAZ Company</div>
+  <ul class="footer-links">
+    <li><a href="#">Privacy Policy</a></li>
+    <li><a href="#">Terms of Use</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  <div class="footer-copy">© 2026 UAZ Company. All rights reserved.</div>
+</footer>
+
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="document.getElementById('modalOverlay').classList.remove('open')">✕</button>
+    <h3 id="modalTitle">Property Name</h3>
+    <p id="modalLoc">Location</p>
+    <div class="modal-details" id="modalDetails"></div>
+    <button class="btn-primary" style="width:100%" onclick="openContact()">Request a Viewing</button>
+  </div>
+</div>
+
+<script>
+const listings = [
+  {title:"5-Bedroom Detached Duplex",loc:"Maitama, Abuja",price:"₦185,000,000",badge:"sale",badgeClass:"badge-sale",beds:5,baths:5,sqft:"520 sqm",type:"Duplex",icon:"🏡"},
+  {title:"3-Bedroom Apartment",loc:"Wuse 2, Abuja",price:"₦850,000/mo",badge:"rent",badgeClass:"badge-rent",beds:3,baths:2,sqft:"180 sqm",type:"Apartment",icon:"🏢"},
+  {title:"Luxury Penthouse",loc:"Eko Atlantic, Lagos",price:"₦420,000,000",badge:"new",badgeClass:"badge-new",beds:4,baths:4,sqft:"350 sqm",type:"Apartment",icon:"🌆"},
+  {title:"4-Bedroom Semi-Detached",loc:"Gwarinpa, Abuja",price:"₦75,000,000",badge:"sale",badgeClass:"badge-sale",beds:4,baths:3,sqft:"300 sqm",type:"House",icon:"🏘️"},
+  {title:"Studio Apartment",loc:"Garki, Abuja",price:"₦320,000/mo",badge:"rent",badgeClass:"badge-rent",beds:1,baths:1,sqft:"65 sqm",type:"Apartment",icon:"🏙️"},
+  {title:"Commercial Office Space",loc:"Victoria Island, Lagos",price:"₦12,000,000/yr",badge:"new",badgeClass:"badge-new",beds:0,baths:2,sqft:"400 sqm",type:"Commercial",icon:"🏬"},
+];
+
+function renderListings(data){
+  const grid = document.getElementById('listingsGrid');
+  grid.innerHTML = data.map((p,i)=>`
+    <div class="card" onclick="openModal(${i})">
+      <div class="card-img-placeholder">
+        <span>${p.icon}</span>
+        <span class="card-badge ${p.badgeClass}">${p.badge==='sale'?'For Sale':p.badge==='rent'?'For Rent':'New'}</span>
+      </div>
+      <div class="card-body">
+        <div class="card-price">${p.price}</div>
+        <div class="card-title">${p.title}</div>
+        <div class="card-loc">${p.loc}</div>
+        <div class="card-features">
+          ${p.beds>0?`<span>🛏 ${p.beds} Beds</span>`:''}
+          <span>🚿 ${p.baths} Baths</span>
+          <span>📐 ${p.sqft}</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterTag(el,filter){
+  document.querySelectorAll('.filter-tag').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  const filtered = filter==='all' ? listings : listings.filter(p=>p.badge===filter||(filter==='luxury'&&parseInt(p.price.replace(/[^\d]/g,''))>100000000));
+  renderListings(filtered);
+}
+
+function doSearch(){
+  const loc = document.getElementById('location').value.toLowerCase();
+  const type = document.getElementById('propType').value.toLowerCase();
+  const filtered = listings.filter(p=>{
+    const matchLoc = !loc || p.loc.toLowerCase().includes(loc);
+    const matchType = !type || p.type.toLowerCase()===type;
+    return matchLoc && matchType;
+  });
+  renderListings(filtered.length ? filtered : listings);
+  document.querySelector('.listings-section').scrollIntoView({behavior:'smooth'});
+}
+
+function openModal(i){
+  const p = listings[i];
+  document.getElementById('modalTitle').textContent = p.title;
+  document.getElementById('modalLoc').textContent = '📍 ' + p.loc;
+  document.getElementById('modalDetails').innerHTML = `
+    <div class="detail-item"><div class="detail-label">Price</div><div class="detail-value">${p.price}</div></div>
+    <div class="detail-item"><div class="detail-label">Type</div><div class="detail-value">${p.type}</div></div>
+    <div class="detail-item"><div class="detail-label">Bedrooms</div><div class="detail-value">${p.beds||'N/A'}</div></div>
+    <div class="detail-item"><div class="detail-label">Bathrooms</div><div class="detail-value">${p.baths}</div></div>
+    <div class="detail-item"><div class="detail-label">Area</div><div class="detail-value">${p.sqft}</div></div>
+    <div class="detail-item"><div class="detail-label">Status</div><div class="detail-value" style="color:#c8a96e">${p.badge==='sale'?'For Sale':p.badge==='rent'?'For Rent':'New'}</div></div>
+  `;
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function closeModal(e){if(e.target===document.getElementById('modalOverlay'))document.getElementById('modalOverlay').classList.remove('open');}
+function openContact(){document.querySelector('.agent-section').scrollIntoView({behavior:'smooth'});}
+
+renderListings(listings);
+</script>
+</body>
+</html>
